@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk & Komposisi - Tahu Joss</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(255, 179, 0, 0.2);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .product-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        /* Packaging */
+        .packaging-box {
+            background: #ffb300;
+            color: #000;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+            border: 2px dashed #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .packaging-box h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .packaging-box .badge {
+            background: var(--primary-color);
+            color: var(--badge-text-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 10px auto 20px;
+            font-weight: bold;
+        }
+
+        .packaging-features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+            padding-top: 20px;
+        }
+
+        .pack-feat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .pack-feat i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        /* Composition Grid */
+        .comp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .comp-item {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .comp-item:hover {
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .comp-img {
+            width: 100%;
+            max-width: 80px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            border: 3px solid var(--secondary-color);
+        }
+
+        .comp-item h4 {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        .comp-note {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .comp-note span {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        @media (max-width: 992px) {
+            .comp-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .comp-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .comp-img {
+                max-width: 60px;
+            }
+
+            .comp-item h4 {
+                font-size: 0.7rem;
+            }
+
+            .page-header {
+                padding: 100px 0 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-main">TAHU JOSS</span>
+                <span class="logo-sub">TAHU ISI AYAM</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+                <li><a href="produk.html" class="active">Produk & Komposisi</a></li>
+                <li><a href="resep.html">Cara Penyajian</a></li>
+                <li><a href="galeri.html">Galeri Foto</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button id="theme-toggle" title="Toggle Light/Dark Mode"><i class="fas fa-moon"></i></button>
+                <a href="https://wa.me/6285719755520" target="_blank" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Pesan Sekarang</a>
+            </div>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="section-title">Produk & Komposisi</h1>
+            <p>Kenali lebih dekat apa yang membuat Tahu Joss begitu istimewa.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="grid-section">
+                <!-- Product Overview -->
+                <div class="product-card animate-fade-in">
+                    <img src="C:\Users\User\.gemini\antigravity\brain\c20c1f80-b540-47d0-b3b2-21f915fbf11c\tahu_kardus_1778997702801.png"
+                        alt="Tahu Joss" class="product-img"
+                        onerror="this.src='https://images.unsplash.com/photo-1627662236973-4fd8358fa206?auto=format&fit=crop&w=800&q=80'">
+                    <div class="product-info">
+                        <h3>PRODUK KAMI</h3>
+                        <p style="margin-bottom: 20px;">Tahu JOSS adalah tahu isi ayam pedas dengan balutan kulit yang
+                            krispi dan isian ayam berbumbu khas yang gurih, pedas, dan juicy. Cocok untuk camilan, teman
+                            makan, atau ide jualan!</p>
+                        <a href="https://wa.me/6285719755520" target="_blank" class="btn btn-danger">LIHAT SEMUA PRODUK <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Packaging -->
+                <div class="packaging-wrapper animate-fade-in" style="animation-delay: 0.2s;">
+                    <h2 class="section-title"
+                        style="font-size: 2rem; margin-bottom: 20px; left: 0; transform: none; text-align: left;">
+                        PACKAGING <span class="text-primary">PRAKTIS</span></h2>
+                    <div class="packaging-box">
+                        <div style="font-size: 1.2rem; font-style: italic; margin-bottom: 10px; color: #333;">nikmat
+                            dimulut<br>bergejolak diperut</div>
+                        <h3>TAHU JOSS</h3>
+                        <div class="badge">TAHU ISI (SIAP SAJI)</div>
+                        <i class="fas fa-box-open"
+                            style="font-size: 4rem; opacity: 0.2; position: absolute; right: 20px; top: 20px;"></i>
+
+                        <div class="packaging-features">
+                            <div class="pack-feat">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>AMAN<br>Higienis & Terjamin</span>
+                            </div>
+                            <div class="pack-feat">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>PRAKTIS<br>Mudah disimpan</span>
+                            </div>
+                            <div class="pack-feat">
+                                <i class="fas fa-utensils"></i>
+                                <span>SIAP SAJI<br>Tinggal goreng</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Composition -->
+                <div class="composition-wrapper animate-fade-in" style="animation-delay: 0.4s;">
+                    <h2 class="section-title"
+                        style="font-size: 2rem; margin-bottom: 20px; left: 0; transform: none; text-align: left;">
+                        KOMPOSISI</h2>
+                    <div class="comp-grid">
+                        <div class="comp-item">
+                            <img src="https://images.unsplash.com/photo-1587593810167-a84920ea0781?auto=format&fit=crop&w=400&q=80"
+                                alt="Ayam" class="comp-img">
+                            <h4>DAGING AYAM PILIHAN</h4>
+                        </div>
+                        <div class="comp-item">
+                            <img src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=400&q=80"
+                                alt="Bawang Merah" class="comp-img">
+                            <h4>BAWANG MERAH</h4>
+                        </div>
+                        <div class="comp-item">
+                            <img src="C:\Users\User\.gemini\antigravity\brain\c20c1f80-b540-47d0-b3b2-21f915fbf11c\bawang_putih_1778998346222.png"
+                                alt="Bawang Putih" class="comp-img">
+                            <h4>BAWANG PUTIH</h4>
+                        </div>
+                        <div class="comp-item">
+                            <img src="C:\Users\User\.gemini\antigravity\brain\c20c1f80-b540-47d0-b3b2-21f915fbf11c\cabe_rawit_1778998374966.png"
+                                alt="Cabe Rawit" class="comp-img">
+                            <h4>CABE RAWIT</h4>
+                        </div>
+                        <div class="comp-item">
+                            <img src="foto produk/merk-tepung-terigu-protein-tinggi-1.jpg" alt="Tepung" class="comp-img"
+                                onerror="this.src='https://placehold.co/400x400/222/fff?text=Tepung'">
+                            <h4>TEPUNG TERIGU</h4>
+                        </div>
+                        <div class="comp-item">
+                            <img src="foto produk/fototahu.jpg" alt="Tahu" class="comp-img"
+                                onerror="this.src='https://placehold.co/400x400/222/fff?text=Tahu'">
+                            <h4>TAHU BERKUALITAS</h4>
+                        </div>
+                        <div class="comp-note">
+                            Tanpa pengawet, tanpa pewarna buatan,<br>
+                            <span>100% dibuat dari bahan berkualitas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-cta">
+                <h2 style="font-family: var(--font-heading); color: var(--secondary-color); font-size: 2rem;">YUK,
+                    COBAIN <span class="text-white">SEKARANG!</span></h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; font-style: italic;">Pedasnya Joss, Rasanya
+                    Nampol!</p>
+            </div>
+            <div class="footer-contact">
+                <a href="https://wa.me/6285719755520" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>0857-1975-5520</span>
+                </a>
+                <a href="https://instagram.com/tahujoss.id" target="_blank" class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@tahujoss.id</span>
+                </a>
+            </div>
+            <div class="footer-banner">
+                <i class="fas fa-truck"></i>
+                BISA KIRIM KE SELURUH INDONESIA
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Tahu Joss. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

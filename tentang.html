@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Tahu Joss</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1627662236973-4fd8358fa206?auto=format&fit=crop&w=1920&q=80') center/cover;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .feature-box {
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.02);
+            border-radius: 15px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            background: rgba(0,0,0,0.04);
+            border-color: var(--secondary-color);
+        }
+
+        .feature-box i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        .feature-box p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .testimonial-section {
+            background: var(--bg-card);
+            padding: 60px;
+            border-radius: 20px;
+            margin-top: 80px;
+            text-align: center;
+            border: 1px dashed var(--secondary-color);
+            position: relative;
+        }
+
+        .testimonial-section::before {
+            content: '\201C';
+            font-family: serif;
+            font-size: 10rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            color: rgba(255,179,0,0.1);
+            line-height: 1;
+        }
+
+        .stars {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .testi-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testi-author {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 100px 0 40px; }
+            .testimonial-section { padding: 30px; }
+            .testi-text { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-main">TAHU JOSS</span>
+                <span class="logo-sub">TAHU ISI AYAM</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="tentang.html" class="active">Tentang Kami</a></li>
+                <li><a href="produk.html">Produk & Komposisi</a></li>
+                <li><a href="resep.html">Cara Penyajian</a></li>
+                <li><a href="galeri.html">Galeri Foto</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button id="theme-toggle" title="Toggle Light/Dark Mode"><i class="fas fa-moon"></i></button>
+                <a href="https://wa.me/6285719755520" target="_blank" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Pesan Sekarang</a>
+            </div>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="section-title">Kenapa Harus Tahu Joss?</h1>
+            <p>Alasan mengapa produk kami menjadi pilihan favorit banyak orang.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="section-padding">
+        <div class="container">
+            
+            <div class="features-grid">
+                <div class="feature-box animate-fade-in" style="animation-delay: 0.1s;">
+                    <i class="fas fa-pepper-hot" style="color: var(--primary-color);"></i>
+                    <h3>PEDAS NAMPOL</h3>
+                    <p>Bikin nagih! Sensasi pedas yang pas dan menggugah selera.</p>
+                </div>
+                <div class="feature-box animate-fade-in" style="animation-delay: 0.2s;">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <h3>ISI MELIMPAH</h3>
+                    <p>Ayam berbumbu lebih banyak, tidak pelit isian.</p>
+                </div>
+                <div class="feature-box animate-fade-in" style="animation-delay: 0.3s;">
+                    <i class="fas fa-cheese"></i>
+                    <h3>KULIT KRISPI</h3>
+                    <p>Diluar garing, didalam lembut dan juicy.</p>
+                </div>
+                <div class="feature-box animate-fade-in" style="animation-delay: 0.4s;">
+                    <i class="fas fa-hand-sparkles"></i>
+                    <h3>HIGIENIS</h3>
+                    <p>Proses bersih & terjamin dari bahan hingga pengemasan.</p>
+                </div>
+                <div class="feature-box animate-fade-in" style="animation-delay: 0.5s;">
+                    <i class="fas fa-users"></i>
+                    <h3>COCOK UNTUK SEMUA</h3>
+                    <p>Camilan, lauk, & ide jualan yang menguntungkan.</p>
+                </div>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="testimonial-section animate-fade-in" style="animation-delay: 0.6s;">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testi-text">"Rasanya juara! Pedasnya pas, isinya banyak, bikin nagih! Pokoknya recommended banget buat nyemil atau lauk makan."</p>
+                <div class="testi-author">- Rina, Pelanggan Setia</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-cta">
+                <h2 style="font-family: var(--font-heading); color: var(--secondary-color); font-size: 2rem;">YUK, COBAIN <span class="text-white">SEKARANG!</span></h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; font-style: italic;">Pedasnya Joss, Rasanya Nampol!</p>
+            </div>
+            <div class="footer-contact">
+                <a href="https://wa.me/6285719755520" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>0857-1975-5520</span>
+                </a>
+                <a href="https://instagram.com/tahujoss.id" target="_blank" class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@tahujoss.id</span>
+                </a>
+            </div>
+            <div class="footer-banner">
+                <i class="fas fa-truck"></i>
+                BISA KIRIM KE SELURUH INDONESIA
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Tahu Joss. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
